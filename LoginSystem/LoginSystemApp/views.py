@@ -6,6 +6,7 @@ from django.contrib import messages
 import random
 from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
+from django.views.decorators.cache import cache_control
 
 def home(request):
     return render (request, 'home.html')
@@ -47,7 +48,8 @@ def signup(request):
            
     return render (request, 'signup.html')
 
-@login_required(login_url='loginpage')
+@login_required(login_url='loginpage')  # if someone enter the url name of page which appears after login, this will prevent it and requires user to login first
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)  # press back button and it will not login again.
 def homepage(request):
     return render (request, 'homepage.html')
 
@@ -74,6 +76,6 @@ def otpverify(request):
             return redirect('loginpage')
 
         else:
-            messages.error(request, 'Incorrect OTP')
+            messages.error(request, 'Incorrect OTP, please try again.')
             return render (request, 'otp.html')
     return render (request, 'otp.html')
