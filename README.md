@@ -15,4 +15,6 @@ Some important tips for using this template in your project:
  
 2) Connect your own front-end (if necessary).
 
+3) For the databse part, i have used the default sqlite3 database to save the passwords. Connect your own database to save passwords. 
+
 Feel free to reach out for any queries at iamfaham5@gmail.com
